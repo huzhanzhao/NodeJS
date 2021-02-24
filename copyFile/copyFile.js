@@ -4,7 +4,7 @@ const stat = fs.stat;
 
 // 核查目录 不存在就创建
 const mkDir = function (dst, dst2, index = 1) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         let result = dst.split(path.sep);
         if (!dst2) {
             dst2 = result[0];
