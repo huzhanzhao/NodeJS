@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-let stat = fs.stat;
+const stat = fs.stat;
 
 // 核查目录 不存在就创建
-let mkDir = function (dst, dst2, index = 1) {
+const mkDir = function (dst, dst2, index = 1) {
     return new Promise((resolve, reject) => {
         let result = dst.split(path.sep);
         if (!dst2) {
@@ -34,13 +34,13 @@ let mkDir = function (dst, dst2, index = 1) {
     })
 }
 // 创建流，复制文件
-let reiteFile = function (sourcePath, targetPath) {
+const reiteFile = function (sourcePath, targetPath) {
     var readable = fs.createReadStream(sourcePath); //创建读取流
     var writable = fs.createWriteStream(targetPath); //创建写入流
     readable.pipe(writable);
 }
 // 读取目录
-let readFileDir = function (src, dst) {
+const readFileDir = function (src, dst) {
     fs.readdir(src, function (err, paths) {
         if (err) {
             throw err;
@@ -62,7 +62,7 @@ let readFileDir = function (src, dst) {
     });
 }
 // 复制目录及文件
-let copyFileDir = function (src, dst, includeDir = true) {
+const copyFileDir = function (src, dst, includeDir = true) {
     if (includeDir) {
         dst = path.resolve(dst, path.basename(src));
     }
@@ -73,7 +73,7 @@ let copyFileDir = function (src, dst, includeDir = true) {
     })
 }
 // 复制文件
-let copyFile = function (sourcePath, targetPath) {
+const copyFile = function (sourcePath, targetPath) {
     if (path.basename(targetPath).indexOf('.') === -1) {
         targetPath = path.join(targetPath, path.basename(sourcePath))
     }
