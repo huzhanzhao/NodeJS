@@ -25,9 +25,7 @@ function download(data = [],
             link.setAttribute('download', fileName);
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
-            $scope.$evalAsync(function () {
-                link.click();
-            })
+            link.click();
             document.body.removeChild(link);
         }
     }
