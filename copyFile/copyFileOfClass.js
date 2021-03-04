@@ -37,7 +37,7 @@ class copyFileApi {
         })
     }
     // 创建流，复制文件
-    reiteFile(src, dst) {
+    writeFile(src, dst) {
         var readable = fs.createReadStream(src); //创建读取流
         var writable = fs.createWriteStream(dst); //创建写入流
         readable.pipe(writable);
@@ -57,7 +57,7 @@ class copyFileApi {
                         throw err;
                     }
                     if (st.isFile()) {
-                        _that.reiteFile(_src, _dst)
+                        _that.writeFile(_src, _dst)
                     } else if (st.isDirectory()) {
                         _that.copyFileDir(_src, _dst, false)
                     }
@@ -84,7 +84,7 @@ class copyFileApi {
             dst = path.join(dst, path.basename(src))
         }
         _that.mkDir(dst).then(() => {
-            _that.reiteFile(src, dst)
+            _that.writeFile(src, dst)
         }).catch(err => {
             console.log(err)
         })

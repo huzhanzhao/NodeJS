@@ -34,10 +34,13 @@ const mkDir = function (dst, dst2, index = 1) {
     })
 }
 // 创建流，复制文件
-const reiteFile = function (src, dst) {
+const writeFile = function (src, dst) {
     var readable = fs.createReadStream(src); //创建读取流
     var writable = fs.createWriteStream(dst); //创建写入流
     readable.pipe(writable);
+    writable.on('finish', () => {
+        console.log('All writes are now complete.');
+    });
 }
 // 读取目录
 const readFileDir = function (src, dst) {
@@ -53,7 +56,7 @@ const readFileDir = function (src, dst) {
                     throw err;
                 }
                 if (st.isFile()) {
-                    reiteFile(_src, _dst)
+                    writeFile(_src, _dst)
                 } else if (st.isDirectory()) {
                     copyFileDir(_src, _dst, false)
                 }
@@ -78,7 +81,7 @@ const copyFile = function (src, dst) {
         dst = path.join(dst, path.basename(src))
     }
     mkDir(dst).then(() => {
-        reiteFile(src, dst)
+        writeFile(src, dst)
     }).catch(err => {
         console.log(err)
     })

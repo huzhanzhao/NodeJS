@@ -1,6 +1,5 @@
 const path = require('path');
-// const { copyFile, copyFileDir } = require('./copyFile2');
-const copyFileApi = require('./copyFile2');
+const copyFileApi = require('./copyFileOfClass');
 
 let resolve = function (paths) {
     let root = path.resolve(__dirname, '../')
