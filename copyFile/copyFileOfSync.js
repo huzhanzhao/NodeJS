@@ -106,4 +106,5 @@ const copyFile = function (src, dst) {
 module.exports = {
     copyFile,
     copyFileDir,
+    copyBigFile,
 }
